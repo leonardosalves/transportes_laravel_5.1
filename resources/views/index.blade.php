@@ -7,8 +7,18 @@ Gerenciador de Estoques
 @section('conteudo')
 <div class="container">
  <br>
-  <p>Listagem de produtos:</p> 
-  <a href="{{ route('produto.novo') }}" class="btn btn-primary" role="button">Cadastrar novo produto</a>           
+  <div><a href="{{ route('produto.novo') }}" class="btn btn-primary adiciona" role="button"><i class="fa fa-plus-circle" aria-hidden="true"></i> Cadastrar novo produto</a></div>
+  <br>
+     <div id="procura_produtos">
+      {!! Form::open(['route'=>'index','method'=>'Get','class'=>'My_class']) !!}
+        
+        {!! Form::label('nome', 'Procurar pelo nome do produto: ') !!}
+        {!! Form::text('nome',null,array('size' => '30'),['class'=>'form-control']) !!}
+        {!! Form::submit('Procurar',['class' => 'btn btn-sm btn-primary']) !!}
+            
+      {!! Form::close() !!}
+  </div>
+  <h3>Listagem de produtos:</h3>          
   <table class="table table-condensed">
     <thead>
       <tr>
@@ -26,7 +36,8 @@ Gerenciador de Estoques
             <td>{{ $produto->marca }}</td>
             <td align="center">{{ $produto->estoque_atual }}</td>
             <td>{{ $produto->observacao }}</td>
-            <td><a href="{{ route('produto.edita', ['id' => $produto->id]) }}" class="btn btn-primary btn-sm" role="button">Editar</a>&nbsp;<a href="{{ route('produto.destroy', ['id' => $produto->id]) }}" class="btn btn-danger btn-sm" role="button">Remover</a></td>
+            <td><a href="{{ route('produto.edita', ['id' => $produto->id]) }}" class="btn btn-primary btn-sm" title="Editar {{ $produto->nome }}" role="button"><i class="fa fa-pencil" aria-hidden="true"></i>
+</a>&nbsp;<a href="{{ route('produto.remove', ['id' => $produto->id]) }}" class="btn btn-danger btn-sm" title="Remover {{ $produto->nome }}" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
         </tr>
         @endforeach
     </tbody>

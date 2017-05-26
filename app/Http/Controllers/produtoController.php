@@ -20,6 +20,7 @@ class produtoController extends Controller
     private $fornecedor;
     private $estoque;
     
+    
     public function __construct(produtos $produto,categorias $categoria,fornecedores $fornecedor,estoques $estoque)
     {
         $this->produto = $produto;
@@ -33,14 +34,32 @@ class produtoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $produtos = $this->produto->paginate(12);
         
+        $produtos = $this->produto->orderBy('nome');
+        $nome = $request->input('nome');
+        if(!empty($nome)){
+            $produtos = produtos::where('nome', 'LIKE', '%' . $nome . '%')
+                        ->orWhere('marca', 'LIKE', '%' . $nome . '%');
+             $produtos = $produtos->paginate(10);
+        }else{ 
+            $produtos = $this->produto->paginate(10);
+        }
         return view('index', compact('produtos'));
     }
 
+    /**
+    public function search(){
+        $produtos = produtos::where('nome', 'LIKE', '%' . $q . '%')
+            ->orWhere('marca', 'LIKE', '%' . $q . '%')
+            ->paginate(10);
+        $produtos->appends(['search' => $q]);
+        
+        return view('index', compact('produtos'));
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -85,7 +104,8 @@ class produtoController extends Controller
      */
     public function show($id)
     {
-        //
+      
+        
     }
 
     /**
@@ -115,6 +135,7 @@ class produtoController extends Controller
     {
         //
         //dd($request->all()); 
+        // Se ouver alguma diferença no estoque atual, acrescentou ou tirado atualizará na tablea de estoque
         if(!empty($request->detalhe) && $request->estoque_atual != $request->estoque_antigo){
             $this->produto->find($id)->update($request->except('_token','detalhe','estoque_antigo')); 
             $atualizacao = ($request->estoque_atual) - ($request->estoque_antigo); 
@@ -123,9 +144,8 @@ class produtoController extends Controller
                                     'quantidade' => $atualizacao,
                                     'data' => date("Y-m-d"),
                                     'descricao' => $request->detalhe]);
-        }elseif(empty($request->detalhe) && $request->estoque_atual != $request->estoque_antigo){
-             return $this->edit($id);
         }else{
+            //Se não atualizará somente a tabela produtos
              $this->produto->find($id)->update($request->except('_token','detalhe','estoque_antigo')); 
         }
         return redirect()->route('index');
@@ -143,4 +163,13 @@ class produtoController extends Controller
         $this->produto->find($id)->delete();
         return redirect()->route('index');
     }
+    
+    public function remove($id){
+            $produto = $this->produto->find($id);
+            $categorias = $this->categoria->lists('nome','id');
+            $fornecedores = $this->fornecedor->lists('nome','id');
+
+            return view('produto.remove',compact('produto','categorias','fornecedores','estoque'));
+    }
+    
 }

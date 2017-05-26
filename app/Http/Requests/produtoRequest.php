@@ -27,6 +27,7 @@ class produtoRequest extends Request
             //
             'nome' => 'required',
             'marca' => 'required',
+            'estoque_atual' => 'required'
         ];
     }
 }

@@ -20,4 +20,15 @@ class produtos extends Model
     {
         return $this->hasMany('App\estoques', 'produtos_id','id');
     }
+    
+     public function categoria(){
+    
+        return $this->belongsTo('App\categorias');
+    }
+     public function fornecedor(){
+    
+        return $this->belongsTo('App\fornecedores');
+    }
+    
+   
 }

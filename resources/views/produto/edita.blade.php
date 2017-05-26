@@ -3,9 +3,11 @@
 @section('titulo')
 Editando {{ $produto->nome }}
 @stop
-
 @section('conteudo')
 <h3> Editando <small>{{ $produto->nome }}</small></h3>
+<script type="text/javascript" src="{{ URL::asset('js/toastr.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/produto/edita.js') }}"></script>
+<link rel="stylesheet" href="{{ URL::asset('css/toastr.css') }}" />
     {!! Form::model($produto, ['route'=>['produto.update', $produto->id],'method'=>'put']) !!}
     @include('_form')
     <div class="form-group">
@@ -52,28 +54,6 @@ Editando {{ $produto->nome }}
         <div class="form-group">
             {!! Form::submit('Salvar alterações', ['class'=>'btn btn-primary']) !!}
         </div>
-        <script>
-             toastr.options.progressBar = true;
-             toastr.options.closeButton = true;
-             $("#estoque_observacao").hide();
-             $(".estoque_atual").change(function(){
-                $("#estoque_observacao").show();
-             }).blur(function(){
-              if($(".estoque_antigo").val() != $(".estoque_atual").val() && $("#detalhe").val() === ""){
-                  toastr.error('Favor informar motivo da mudança de estoque');
-                    $(".btn-primary").attr('disabled','disabled');
-                }else{
-                     $("input").removeAttr('disabled');
-                } 
-            });
-            $("#detalhe").blur(function(){
-              if($(".estoque_antigo").val() != $(".estoque_atual").val() && $("#detalhe").val() === ""){
-                  toastr.error('Favor informar motivo da mudança de estoque');
-                    $(".btn-primary").attr('disabled','disabled');
-                }else{
-                     $("input").removeAttr('disabled');
-                } 
-            });
-        </script>
     {!! Form::close() !!}
+    
 @stop

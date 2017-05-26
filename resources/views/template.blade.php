@@ -2,22 +2,10 @@
     <head>
     <title>@yield('titulo')</title>
      <script type="text/javascript" src="{{ URL::asset('js/jquery.js') }}"></script>
-     <script type="text/javascript" src="{{ URL::asset('js/tether.js') }}"></script>
-     <script type="text/javascript" src="{{ URL::asset('js/bootstrap.js') }}"></script>
-     <script type="text/javascript" src="{{ URL::asset('js/toastr.js') }}"></script>
      <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}" />
-     <link rel="stylesheet" href="{{ URL::asset('css/toastr.css') }}" />
+     <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
      <link rel="stylesheet" href="{{ URL::asset('css/font-awesome.min.css') }}" />
-     <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-     <style>
-        body {
-          padding-top: 50px;
-        }
-        .starter-template {
-          padding: 40px 15px;
-          text-align: center;
-        }
-        </style>
+     <script type="text/javascript" src="{{ URL::asset('js/tether.js') }}"></script>
 </head>
 <body>
 
@@ -30,11 +18,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{{ route('index') }}" >Gerenciador produtos</a>
+          <a class="navbar-brand" href="{{ route('index') }}" ><i style="font-size:20px;margin-top:-8px" class="fa fa-product-hunt" aria-hidden="true">rodutos</i><br> <small style="font-size:10px">Transportes Restauração</small></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="{{ route('index') }}">Listagem de produtos</a></li>
+            <li class=""><a href="{{ route('index') }}"></a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

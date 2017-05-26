@@ -12,4 +12,10 @@ class fornecedores extends Model
         'telefone',
         'endereco'
     ];
+    
+    
+    public function produto()
+    {
+        return $this->hasMany('App\produto', 'produtos_id','id');
+    }
 }
