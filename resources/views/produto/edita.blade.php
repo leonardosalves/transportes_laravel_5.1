@@ -9,12 +9,15 @@ Editando {{ $produto->nome }}
     {!! Form::model($produto, ['route'=>['produto.update', $produto->id],'method'=>'put']) !!}
     @include('_form')
     <div class="form-group">
-        {!! Form::label('quantidade', 'Estoque Atual: ') !!}
-        {!! Form::number('quantidade', $produto->estoque->sum('quantidade'),['class'=>'quantidade_estoque']) !!}
+        {!! Form::label('estoque_atual', 'Estoque Atual: ') !!}
+        {!! Form::text('estoque_antigo', $produto->estoque_atual,['class'=>'estoque_antigo', 'readonly' => 'true']) !!}
+        <br><br>
+        {!! Form::label('estoque_atual', 'Novo valor: ') !!}
+        {!! Form::text('estoque_atual', null,['class'=>'estoque_atual']) !!}
+        &nbsp;&nbsp;&nbsp;
         <span id="estoque_observacao">
-            &nbsp;&nbsp;&nbsp;
             {!! Form::label('detalhe', 'Motivo da atualização de estoque: ') !!}
-            {!! Form::text('detalhe', null,array('size' => '90')) !!}
+            {!! Form::text('detalhe', null,array('size' => '90') ,['class'=>'detalhe']) !!}
         </span>
     </div> 
         <div class="panel panel-primary">
@@ -23,7 +26,6 @@ Editando {{ $produto->nome }}
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th>#</th>
                   <th>Quantidade</th>
                   <th>Data</th>
                   <th>Descrição</th>
@@ -32,9 +34,6 @@ Editando {{ $produto->nome }}
               <tbody>
                   @foreach($produto->estoque as $estoques)
                       <tr>
-                          <td>
-                              {{ $estoques->id }}
-                          </td>
                           <td>
                               {{ $estoques->quantidade }}
                           </td>
@@ -54,10 +53,26 @@ Editando {{ $produto->nome }}
             {!! Form::submit('Salvar alterações', ['class'=>'btn btn-primary']) !!}
         </div>
         <script>
+             toastr.options.progressBar = true;
+             toastr.options.closeButton = true;
              $("#estoque_observacao").hide();
-            $(".quantidade_estoque").change(function(){
+             $(".estoque_atual").change(function(){
                 $("#estoque_observacao").show();
-                
+             }).blur(function(){
+              if($(".estoque_antigo").val() != $(".estoque_atual").val() && $("#detalhe").val() === ""){
+                  toastr.error('Favor informar motivo da mudança de estoque');
+                    $(".btn-primary").attr('disabled','disabled');
+                }else{
+                     $("input").removeAttr('disabled');
+                } 
+            });
+            $("#detalhe").blur(function(){
+              if($(".estoque_antigo").val() != $(".estoque_atual").val() && $("#detalhe").val() === ""){
+                  toastr.error('Favor informar motivo da mudança de estoque');
+                    $(".btn-primary").attr('disabled','disabled');
+                }else{
+                     $("input").removeAttr('disabled');
+                } 
             });
         </script>
     {!! Form::close() !!}

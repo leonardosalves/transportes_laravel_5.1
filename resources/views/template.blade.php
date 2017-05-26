@@ -4,7 +4,9 @@
      <script type="text/javascript" src="{{ URL::asset('js/jquery.js') }}"></script>
      <script type="text/javascript" src="{{ URL::asset('js/tether.js') }}"></script>
      <script type="text/javascript" src="{{ URL::asset('js/bootstrap.js') }}"></script>
+     <script type="text/javascript" src="{{ URL::asset('js/toastr.js') }}"></script>
      <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}" />
+     <link rel="stylesheet" href="{{ URL::asset('css/toastr.css') }}" />
      <link rel="stylesheet" href="{{ URL::asset('css/font-awesome.min.css') }}" />
      <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
      <style>

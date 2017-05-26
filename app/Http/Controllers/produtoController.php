@@ -74,7 +74,6 @@ class produtoController extends Controller
                                 'quantidade' => $request->estoque_atual,
                                 'data' => date("Y-m-d"),
                                 'descricao' => 'Estoque inicial']);
-        
         return redirect()->route('index');
     }
 
@@ -115,14 +114,21 @@ class produtoController extends Controller
     public function update($id, produtoRequest $request)
     {
         //
-        dd($request->all());
-        //$this->produto->find($id)->update($request->except('_token','quantidade'));
-        //Criando registro no estoque
-        //$this->estoque->create(['produtos_id' => $id,
-                                //'quantidade' => $request->quantidade,
-                               // 'data' => date("Y-m-d"),
-                               // 'descricao' => $request->detalhe]);
-        //return redirect()->route('index');
+        //dd($request->all()); 
+        if(!empty($request->detalhe) && $request->estoque_atual != $request->estoque_antigo){
+            $this->produto->find($id)->update($request->except('_token','detalhe','estoque_antigo')); 
+            $atualizacao = ($request->estoque_atual) - ($request->estoque_antigo); 
+            //Criando registro no estoque
+            $this->estoque->create(['produtos_id' => $id,
+                                    'quantidade' => $atualizacao,
+                                    'data' => date("Y-m-d"),
+                                    'descricao' => $request->detalhe]);
+        }elseif(empty($request->detalhe) && $request->estoque_atual != $request->estoque_antigo){
+             return $this->edit($id);
+        }else{
+             $this->produto->find($id)->update($request->except('_token','detalhe','estoque_antigo')); 
+        }
+        return redirect()->route('index');
     }
 
     /**
