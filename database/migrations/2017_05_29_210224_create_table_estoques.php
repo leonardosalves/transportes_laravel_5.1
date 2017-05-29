@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableValores extends Migration
+class CreateTableEstoques extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,11 @@ class CreateTableValores extends Migration
      */
     public function up()
     {
-        Schema::create('valores', function (Blueprint $table) {
+        Schema::create('estoques', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('produtos_id')->unsigned();
+            $table->integer('produtos_id');
             $table->foreign('produtos_id')->references('id')->on('produtos')->onDelete('cascade');
-            $table->float('valor',10,2);
+            $table->integer('quantidade');
             $table->text('descricao');
             $table->date('data');
             $table->timestamps();
@@ -30,6 +30,6 @@ class CreateTableValores extends Migration
      */
     public function down()
     {
-        Schema::drop('valores');
+        Schema::drop('estoques');
     }
 }

@@ -17,11 +17,11 @@ class CreateTableProdutos extends Migration
             $table->string('nome');
             $table->text('marca');
             $table->integer('categoria_id');
-            $table->foreign('categoria_id')->references('id')->on('categorias');
+            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
             $table->integer('fornecedor_id');
-            $table->foreign('fornecedor_id')->references('id')->on('fornecedores');
+            $table->foreign('fornecedor_id')->references('id')->on('fornecedores')->onDelete('cascade');
             $table->integer('estoque_atual');
-            $table->float('valor', 10, 2);
+            $table->decimal('valor', 10,2);
             $table->text('observacao');
             $table->timestamps();
         });

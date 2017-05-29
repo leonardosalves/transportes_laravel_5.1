@@ -14,7 +14,7 @@ class CreateTableValores extends Migration
     {
         Schema::create('valores', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('produtos_id')->unsigned();
+            $table->integer('produtos_id');
             $table->foreign('produtos_id')->references('id')->on('produtos')->onDelete('cascade');
             $table->decimal('valor',10,2);
             $table->text('descricao');

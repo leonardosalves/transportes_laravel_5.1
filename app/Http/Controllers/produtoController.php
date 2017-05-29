@@ -177,6 +177,8 @@ class produtoController extends Controller
     {
         //
         $this->produto->find($id)->delete();
+        //Deleta tanto estoque como o historico de valores
+        $this->produto->boot();
         return redirect()->route('index');
     }
     

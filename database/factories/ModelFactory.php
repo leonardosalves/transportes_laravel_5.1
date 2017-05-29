@@ -41,6 +41,7 @@ $factory->define(App\produtos::class, function (Faker\Generator $faker) {
         'categoria_id' => $faker->numberBetween($min = 1, $max = 50),
         'fornecedor_id' => $faker->numberBetween($min = 1, $max = 50),
         'estoque_atual' => $faker->numberBetween($min = 0, $max = 0),
+        'valor' => $faker->numberBetween($min = 55, $max = 3000),
         'observacao' => $faker->text($maxNbChars = 50) 
     ];
 });

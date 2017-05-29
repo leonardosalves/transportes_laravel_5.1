@@ -36,5 +36,16 @@ class produtos extends Model
         return $this->belongsTo('App\fornecedores');
     }
     
-   
+    //Deleta estas tableas relacionadas valores e estoques**
+    public static function boot()
+    {
+        parent::boot();    
+    
+        // cause a delete of a product to cascade to children so they are also deleted
+        static::deleted(function($product)
+        {
+            $product->valores()->delete();
+            $product->estoque()->delete();
+        });
+    }    
 }
