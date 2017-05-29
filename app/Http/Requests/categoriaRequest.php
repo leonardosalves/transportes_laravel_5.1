@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class produtoRequest extends Request
+class categoriaRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,15 +21,11 @@ class produtoRequest extends Request
      *
      * @return array
      */
-    
     public function rules()
     {
         return [
             //
-            'nome' => 'required',
-            'marca' => 'required',
-            'valor' => 'required',
-            'estoque_atual' => 'required|numeric'
+            'nome' => 'required'
         ];
     }
 }

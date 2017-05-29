@@ -13,12 +13,18 @@ class produtos extends Model
         'estoque_atual',
         'fornecedor_id',
         'categoria_id',
-        'observacao'
+        'observacao',
+        'valor'
     ];
     
     public function estoque()
     {
         return $this->hasMany('App\estoques', 'produtos_id','id');
+    }
+    
+    public function valores()
+    {
+        return $this->hasMany('App\valores', 'produtos_id','id');
     }
     
      public function categoria(){

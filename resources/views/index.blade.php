@@ -7,19 +7,28 @@ Gerenciador de Estoques
 @section('conteudo')
 <div class="container">
  <br>
-  <div><a href="{{ route('produto.novo') }}" class="btn btn-primary adiciona" role="button"><i class="fa fa-plus-circle" aria-hidden="true"></i> Cadastrar novo produto</a></div>
   <br>
-     <div id="procura_produtos">
+ <div id="procura_produtos">
       {!! Form::open(['route'=>'index','method'=>'Get','class'=>'My_class']) !!}
-        
-        {!! Form::label('nome', 'Procurar pelo nome do produto: ') !!}
-        {!! Form::text('nome',null,array('size' => '30'),['class'=>'form-control']) !!}
-        {!! Form::submit('Procurar',['class' => 'btn btn-sm btn-primary']) !!}
-            
+
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="input-group">
+          <input type="text" name="nome" class="form-control" placeholder="Procurar por...">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Procurar</button>
+          </span>
+        </div>
+      </div><!-- /.col-lg-6 -->
+      <div class="col-lg-6">
+       <div><a href="{{ route('produto.novo') }}" style="float:right;position:relative" class="btn btn-primary adiciona" role="button"><i class="fa fa-plus-circle" aria-hidden="true">        </i> Cadastrar produto</a>
+        </div>
+      </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->  
       {!! Form::close() !!}
   </div>
   <h3>Listagem de produtos:</h3>          
-  <table class="table table-condensed">
+  <table class="table table-condensed table-hover">
     <thead>
       <tr>
         <th>Nome do produto</th>

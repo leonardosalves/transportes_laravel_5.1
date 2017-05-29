@@ -21,3 +21,22 @@ Route::group(['prefix' => 'produto'], function(){
     Route::put('update/{id}', [ 'as' => 'produto.update', 'uses' => 'produtoController@update']);
     Route::post('store', [ 'as' => 'produto.store', 'uses' => 'produtoController@store']);
 });
+
+Route::group(['prefix' => 'categoria'], function(){
+    Route::get('index', [ 'as' => 'categoria.index', 'uses' => 'categoriaController@index']);
+    Route::get('novo', [ 'as' => 'categoria.novo', 'uses' => 'categoriaController@create']);
+    Route::get('edita/{id}', [ 'as' => 'categoria.edita', 'uses' => 'categoriaController@edit']);
+    Route::get('remove/{id}', [ 'as' => 'categoria.remove', 'uses' => 'categoriaController@remove']);
+    Route::get('destroy/{id}', [ 'as' => 'categoria.destroy', 'uses' => 'categoriaController@destroy']);
+    Route::put('update/{id}', [ 'as' => 'categoria.update', 'uses' => 'categoriaController@update']);
+    Route::post('store', [ 'as' => 'categoria.store', 'uses' => 'categoriaController@store']);
+});
+Route::group(['prefix' => 'fornecedor'], function(){
+    Route::get('index', [ 'as' => 'fornecedor.index', 'uses' => 'fornecedorController@index']);
+    Route::get('novo', [ 'as' => 'fornecedor.novo', 'uses' => 'fornecedorController@create']);
+    Route::get('edita/{id}', [ 'as' => 'fornecedor.edita', 'uses' => 'fornecedorController@edit']);
+    Route::get('remove/{id}', [ 'as' => 'fornecedor.remove', 'uses' => 'fornecedorController@remove']);
+    Route::get('destroy/{id}', [ 'as' => 'fornecedor.destroy', 'uses' => 'fornecedorController@destroy']);
+    Route::put('update/{id}', [ 'as' => 'fornecedor.update', 'uses' => 'fornecedorController@update']);
+    Route::post('store', [ 'as' => 'fornecedor.store', 'uses' => 'fornecedorController@store']);
+});

@@ -2,6 +2,7 @@
     <head>
     <title>@yield('titulo')</title>
      <script type="text/javascript" src="{{ URL::asset('js/jquery.js') }}"></script>
+     <script type="text/javascript" src="{{ URL::asset('js/bootstrap.js') }}"></script>
      <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}" />
      <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
      <link rel="stylesheet" href="{{ URL::asset('css/font-awesome.min.css') }}" />
@@ -22,7 +23,19 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class=""><a href="{{ route('index') }}"></a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Fornecedores <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ route('fornecedor.novo') }}"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Adicionar Fornecedor</a></li>
+                <li><a href="{{ route('fornecedor.index') }}"><i class="fa fa-list-alt" aria-hidden="true"></i> Listar fornecedores</a></li>
+              </ul>
+            </li><li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categorias <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ route('categoria.novo') }}"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Adicionar Categoria</a></li>
+                <li><a href="{{ route('categoria.index') }}"><i class="fa fa-list-alt" aria-hidden="true"></i> Listar categorias</a></li>
+              </ul>
+            </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

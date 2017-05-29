@@ -5,6 +5,8 @@ Novo Produto
 @stop
 
 @section('conteudo')
+<script type="text/javascript" src="{{ URL::asset('js/maskMoney.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/produto/novo.js') }}"></script>
 <h3>Novo Produto</h3>
     {!! Form::open(['route'=>'produto.store','method'=>'post']) !!}
      @include('_form')

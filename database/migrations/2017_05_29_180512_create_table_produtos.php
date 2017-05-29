@@ -21,6 +21,7 @@ class CreateTableProdutos extends Migration
             $table->integer('fornecedor_id');
             $table->foreign('fornecedor_id')->references('id')->on('fornecedores');
             $table->integer('estoque_atual');
+            $table->float('valor', 10, 2);
             $table->text('observacao');
             $table->timestamps();
         });

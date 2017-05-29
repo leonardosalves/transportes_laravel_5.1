@@ -21,4 +21,6 @@
              $("input").removeAttr('disabled');
         } 
     });
+     //$('.valor').mask('000.000.000.000,000.000', {reverse: false});
+     $('.valor').maskMoney({prefix:'R$ ', allowNegative: true, thousands:',', decimal:'.', affixesStay: false});
 });

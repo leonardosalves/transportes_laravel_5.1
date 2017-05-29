@@ -10,6 +10,7 @@ use \App\produtos;
 use \App\categorias;
 use \App\fornecedores;
 use \App\estoques;
+use \App\valores;
 use \App\Http\Requests\produtoRequest;
 
 class produtoController extends Controller
@@ -19,14 +20,16 @@ class produtoController extends Controller
     private $categoria;
     private $fornecedor;
     private $estoque;
+    private $valor;
     
     
-    public function __construct(produtos $produto,categorias $categoria,fornecedores $fornecedor,estoques $estoque)
+    public function __construct(produtos $produto,categorias $categoria,fornecedores $fornecedor,estoques $estoque,valores $valor)
     {
         $this->produto = $produto;
         $this->categoria = $categoria;
         $this->fornecedor = $fornecedor;
         $this->estoque = $estoque;
+        $this->valor = $valor;
     }
     
     /**
@@ -93,6 +96,12 @@ class produtoController extends Controller
                                 'quantidade' => $request->estoque_atual,
                                 'data' => date("Y-m-d"),
                                 'descricao' => 'Estoque inicial']);
+        //Criando preço inicial
+        $this->valor->create(['produtos_id' => $produto->id,
+                                'valor' => $request->valor,
+                                'data' => date("Y-m-d"),
+                                'descricao' => 'Valor inicial']);
+        
         return redirect()->route('index');
     }
 
@@ -121,7 +130,7 @@ class produtoController extends Controller
         $categorias = $this->categoria->lists('nome','id');
         $fornecedores = $this->fornecedor->lists('nome','id');
         
-        return view('produto.edita',compact('produto','categorias','fornecedores','estoque'));
+        return view('produto.edita',compact('produto','categorias','fornecedores'));
     }
 
     /**
@@ -136,8 +145,15 @@ class produtoController extends Controller
         //
         //dd($request->all()); 
         // Se ouver alguma diferença no estoque atual, acrescentou ou tirado atualizará na tablea de estoque
+        if($request->valor_antigo != $request->valor){
+            //Criando registro no estoque
+            $this->valor->create(['produtos_id' => $id,
+                                    'valor' => $request->valor,
+                                    'data' => date("Y-m-d"),
+                                    'descricao' => "Atualização de valor"]);
+        }
         if(!empty($request->detalhe) && $request->estoque_atual != $request->estoque_antigo){
-            $this->produto->find($id)->update($request->except('_token','detalhe','estoque_antigo')); 
+            $this->produto->find($id)->update($request->except('_token','detalhe','estoque_antigo','valor_antigo')); 
             $atualizacao = ($request->estoque_atual) - ($request->estoque_antigo); 
             //Criando registro no estoque
             $this->estoque->create(['produtos_id' => $id,
@@ -146,7 +162,7 @@ class produtoController extends Controller
                                     'descricao' => $request->detalhe]);
         }else{
             //Se não atualizará somente a tabela produtos
-             $this->produto->find($id)->update($request->except('_token','detalhe','estoque_antigo')); 
+             $this->produto->find($id)->update($request->except('_token','detalhe','estoque_antigo','valor_antigo')); 
         }
         return redirect()->route('index');
     }

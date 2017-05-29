@@ -23,6 +23,10 @@
           {!! Form::select('fornecedor_id', $fornecedores,null, ['class'=>'form-control']) !!} 
     <div class="form-group">
         {!! Form::label('observacao', 'Observação: ') !!}
-        {!! Form::textarea('observacao',null, ['class'=>'form-control']) !!}
+        {!! Form::textarea('observacao',null, ['class'=>'form-control','rows' => "3", 'cols' => "50"]) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('valor', 'Valor: ') !!}
+        {!! Form::text('valor',null, ['class'=>'valor form-control']) !!}
     </div>
    
