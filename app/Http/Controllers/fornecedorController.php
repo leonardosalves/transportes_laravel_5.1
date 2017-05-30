@@ -62,7 +62,7 @@ class fornecedorController extends Controller
     {
         //
         $fornecedor = $this->fornecedor->create($request->except('_token'));
-        
+        $request->session()->flash('alert-success', 'Fornecedor criado com sucesso!');
         return redirect()->route('fornecedor.index');
     }
 
@@ -101,7 +101,8 @@ class fornecedorController extends Controller
     public function update(fornecedorRequest $request, $id)
     {
         //
-        $this->fornecedor->find($id)->update($request->except('_token')); 
+        $this->fornecedor->find($id)->update($request->except('_token'));
+        \Session::flash('alert-info','Fornecedor editado com sucesso.');
         return redirect()->route('fornecedor.index');
     }
 
@@ -115,6 +116,7 @@ class fornecedorController extends Controller
     {
         //
         $this->fornecedor->find($id)->delete();
+        \Session::flash('alert-danger','Fornecedor removido com sucesso.');
         return redirect()->route('fornecedor.index');
     }
 }

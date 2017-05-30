@@ -6,3 +6,7 @@ body {
     padding: 30px 10px;
     text-align: center;
 }
+
+h3:not(.panel-title){
+    padding: 20px;
+}

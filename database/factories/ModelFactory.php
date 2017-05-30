@@ -22,7 +22,8 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\categorias::class, function (Faker\Generator $faker) {
     return [
-        'nome' => $faker->name
+        'nome' => $faker->name,
+        'ativo' => $faker->numberBetween($min = 0, $max = 1)
     ];
 });
 
@@ -30,7 +31,8 @@ $factory->define(App\fornecedores::class, function (Faker\Generator $faker) {
     return [
         'nome' => $faker->name,
         'telefone' => $faker->phoneNumber,
-        'endereco' => $faker->address
+        'endereco' => $faker->address,
+        'ativo' => $faker->numberBetween($min = 0, $max = 1)
     ];
 });
 

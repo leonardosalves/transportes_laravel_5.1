@@ -61,7 +61,7 @@ class categoriaController extends Controller
         //
          //dd($request->all());
         $categoria = $this->categoria->create($request->except('_token'));
-        
+        $request->session()->flash('alert-success', 'Categoria criada com sucesso!');
         return redirect()->route('categoria.index');
     }
 
@@ -101,6 +101,7 @@ class categoriaController extends Controller
     {
         //
         $this->categoria->find($id)->update($request->except('_token')); 
+        \Session::flash('alert-info','Categoria editada com sucesso.');
         return redirect()->route('categoria.index');
     }
 
@@ -114,6 +115,7 @@ class categoriaController extends Controller
     {
         //
         $this->categoria->find($id)->delete();
+        \Session::flash('alert-danger','Categoria removida com sucesso.');
         return redirect()->route('categoria.index');
     }
 }

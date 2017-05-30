@@ -9,7 +9,8 @@ class categorias extends Model
     //
     
     protected $fillable = [
-        'nome'
+        'nome',
+        'ativo'
     ];
     
     public function produto()

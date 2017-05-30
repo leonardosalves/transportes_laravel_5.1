@@ -5,6 +5,7 @@ Gerenciador de fornecedores
 @stop
 
 @section('conteudo')
+<link rel="stylesheet" href="{{ URL::asset('css/fornecedor/edita.css') }}" />
 <div class="container">
  <br>
   <br>
@@ -31,6 +32,7 @@ Gerenciador de fornecedores
     <thead>
       <tr>
         <th>ID</th>
+        <th>Ativo</th>
         <th>Nome</th>
         <th>Telefone</th>
         <th>Endereço</th>
@@ -41,11 +43,18 @@ Gerenciador de fornecedores
         @foreach($fornecedores as $fornecedor)
         <tr>
             <td>{{ $fornecedor->id }}</td>
+            <td align="center">
+                @if($fornecedor->ativo == 0)
+                    <i class="fa fa-times" aria-hidden="false"></i>
+                @else
+                    <i class="fa fa-check" aria-hidden="false"></i>
+                @endif
+            </td>
             <td>{{ $fornecedor->nome }}</td>
             <td>{{ $fornecedor->telefone }}</td>
             <td>{{ $fornecedor->endereco }}</td>
             <td><a href="{{ route('fornecedor.edita', ['id' => $fornecedor->id]) }}" class="btn btn-primary btn-sm" title="Editar {{ $fornecedor->nome }}" role="button"><i class="fa fa-pencil" aria-hidden="true"></i>
-</a>&nbsp;<a href="{{ route('fornecedor.destroy', ['id' => $fornecedor->id]) }}" class="btn btn-danger btn-sm" title="Remover {{ $fornecedor->nome }}" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+</a><!-- &nbsp;<a href="{{ route('fornecedor.destroy', ['id' => $fornecedor->id]) }}" class="btn btn-danger btn-sm" title="Remover {{ $fornecedor->nome }}" role="button"><i class="fa fa-trash-o" aria-hidden="true"> --></i></a></td>
         </tr>
         @endforeach
     </tbody>

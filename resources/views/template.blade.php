@@ -1,12 +1,35 @@
-<html>
+
+ <script type="text/javascript" src="{{ URL::asset('js/jquery.js') }}"></script>
+ <script type="text/javascript" src="{{ URL::asset('js/bootstrap.js') }}"></script>
+ <script type="text/javascript" src="{{ URL::asset('js/index.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/toastr.js') }}"></script>
+ <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}" />
+ <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
+ <link rel="stylesheet" href="{{ URL::asset('css/font-awesome.min.css') }}" />
+<link rel="stylesheet" href="{{ URL::asset('css/toastr.css') }}" />
+ <script type="text/javascript" src="{{ URL::asset('js/tether.js') }}"></script>
+   <div class="flash-message">
+    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+      @if(Session::has('alert-' . $msg))
+       <script>
+            toastr.options.progressBar = true;
+            toastr.options.closeButton = true;
+            // Stuff to do as soon as the DOM is ready;
+            var alerta = '<?php echo $msg;?>';
+            var mensagem = '<?php echo Session::get('alert-' . $msg);?>';
+            if(alerta == 'danger'){
+                toastr.error(mensagem, 'Aviso!');
+            }else{
+                 toastr.success(mensagem, 'Mensagem!');
+            }
+        </script> 
+      <!-- <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p> -->
+      @endif
+    @endforeach
+  </div> <!-- end .flash-message -->
+   <html>
     <head>
     <title>@yield('titulo')</title>
-     <script type="text/javascript" src="{{ URL::asset('js/jquery.js') }}"></script>
-     <script type="text/javascript" src="{{ URL::asset('js/bootstrap.js') }}"></script>
-     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}" />
-     <link rel="stylesheet" href="{{ URL::asset('css/index.css') }}" />
-     <link rel="stylesheet" href="{{ URL::asset('css/font-awesome.min.css') }}" />
-     <script type="text/javascript" src="{{ URL::asset('js/tether.js') }}"></script>
 </head>
 <body>
 

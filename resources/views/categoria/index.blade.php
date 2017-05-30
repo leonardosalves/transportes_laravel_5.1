@@ -5,6 +5,7 @@ Gerenciador de categorias
 @stop
 
 @section('conteudo')
+<link rel="stylesheet" href="{{ URL::asset('css/categoria/edita.css') }}" />
 <div class="container">
  <br>
   <br>
@@ -31,6 +32,7 @@ Gerenciador de categorias
     <thead>
       <tr>
         <th>ID</th>
+        <th>Ativo</th>
         <th>Nome da categoria</th>
         <th>Ação</th>
       </tr>
@@ -39,9 +41,16 @@ Gerenciador de categorias
         @foreach($categorias as $categoria)
         <tr>
             <td>{{ $categoria->id }}</td>
+            <td>
+                @if($categoria->ativo == 0)
+                    <i class="fa fa-times" aria-hidden="false"></i>
+                @else
+                    <i class="fa fa-check" aria-hidden="false"></i>
+                @endif
+            </td>
             <td>{{ $categoria->nome }}</td>
             <td><a href="{{ route('categoria.edita', ['id' => $categoria->id]) }}" class="btn btn-primary btn-sm" title="Editar {{ $categoria->nome }}" role="button"><i class="fa fa-pencil" aria-hidden="true"></i>
-</a>&nbsp;<a href="{{ route('categoria.destroy', ['id' => $categoria->id]) }}" class="btn btn-danger btn-sm" title="Remover {{ $categoria->nome }}" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+</a><!-- &nbsp;<a href="{{ route('categoria.destroy', ['id' => $categoria->id]) }}" class="btn btn-danger btn-sm" title="Remover {{ $categoria->nome }}" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i></a> --></td>
         </tr>
         @endforeach
     </tbody>

@@ -71,8 +71,10 @@ class produtoController extends Controller
     public function create()
     {
         //
-        $categorias = $this->categoria->lists('nome','id');
-        $fornecedores = $this->fornecedor->lists('nome','id');
+        $categorias = categorias::where('ativo', '=', '1');
+        $categorias = $categorias->lists('nome','id');
+        $fornecedores = fornecedores::where('ativo', '=', '1');
+        $fornecedores = $fornecedores->lists('nome','id');
         
         return view('produto.novo', compact('categorias','fornecedores'));
         
@@ -102,6 +104,7 @@ class produtoController extends Controller
                                 'data' => date("Y-m-d"),
                                 'descricao' => 'Valor inicial']);
         
+        $request->session()->flash('alert-success', 'Produto criado com sucesso!');
         return redirect()->route('index');
     }
 
@@ -127,8 +130,10 @@ class produtoController extends Controller
     {
         //
         $produto = $this->produto->find($id);
-        $categorias = $this->categoria->lists('nome','id');
-        $fornecedores = $this->fornecedor->lists('nome','id');
+        $categorias = categorias::where('ativo', '=', '1');
+        $categorias = $categorias->lists('nome','id');
+        $fornecedores = fornecedores::where('ativo', '=', '1');
+        $fornecedores = $fornecedores->lists('nome','id');
         
         return view('produto.edita',compact('produto','categorias','fornecedores'));
     }
@@ -164,6 +169,7 @@ class produtoController extends Controller
             //Se não atualizará somente a tabela produtos
              $this->produto->find($id)->update($request->except('_token','detalhe','estoque_antigo','valor_antigo')); 
         }
+        \Session::flash('alert-info','Produto editado com sucesso.');
         return redirect()->route('index');
     }
 
@@ -179,6 +185,7 @@ class produtoController extends Controller
         $this->produto->find($id)->delete();
         //Deleta tanto estoque como o historico de valores
         $this->produto->boot();
+        \Session::flash('alert-danger','Produto removido com sucesso.');
         return redirect()->route('index');
     }
     

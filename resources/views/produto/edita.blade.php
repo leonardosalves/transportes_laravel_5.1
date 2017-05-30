@@ -5,10 +5,8 @@ Editando {{ $produto->nome }}
 @stop
 @section('conteudo')
 <h3> Editando <small>{{ $produto->nome }}</small></h3>
-<script type="text/javascript" src="{{ URL::asset('js/toastr.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/maskMoney.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/produto/edita.js') }}"></script>
-<link rel="stylesheet" href="{{ URL::asset('css/toastr.css') }}" />
        
   <div class="container">
     <div class="row">
