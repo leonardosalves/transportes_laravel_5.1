@@ -8,7 +8,7 @@ Confirmação de exclusão de {{ $produto->nome }}
 @section('conteudo')
 <br><br>
 <div class="panel panel-danger">
-  <div class="panel-heading">Confirmarção de exclusão do produto {{ $produto->nome }}</div>
+  <div class="panel-heading">Comfirmarção de exclusão do produto {{ $produto->nome }}</div>
   <div class="panel-body">
   <div class="table-responsive">          
       <table class="table">

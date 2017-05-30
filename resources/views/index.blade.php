@@ -28,14 +28,14 @@ Gerenciador de Estoques
       {!! Form::close() !!}
   </div>
   <h3>Listagem de produtos:</h3>          
-  <table class="table table-condensed table-hover">
-    <thead>
+  <table class="table table-condensed table-hover table-bordered">
+    <thead style="background-color:#2e6da4;color:white">
       <tr>
         <th>Nome do produto</th>
         <th>Marca</th>
-        <th>Estoque atual</th>
+        <th style="text-align: center;">Estoque atual</th>
         <th>Observação</th>
-        <th>Ação</th>
+        <th style="text-align: center;">Ação</th>
       </tr>
     </thead>
     <tbody>   

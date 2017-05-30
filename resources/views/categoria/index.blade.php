@@ -28,20 +28,24 @@ Gerenciador de categorias
       {!! Form::close() !!}
   </div>
   <h3>Listagem de categorias:</h3>          
-  <table class="table table-condensed table-hover">
-    <thead>
+  <table class="table table-condensed table-hover table-bordered">
+    <thead style="background-color:#2e6da4;color:white">
       <tr>
-        <th>ID</th>
-        <th>Ativo</th>
+        <th style="text-align: center;">ID</th>
+        <th style="text-align: center;">Ativo</th>
         <th>Nome da categoria</th>
-        <th>Ação</th>
+        <th style="text-align: center;">Ação</th>
       </tr>
     </thead>
     <tbody>   
         @foreach($categorias as $categoria)
-        <tr>
-            <td>{{ $categoria->id }}</td>
-            <td>
+           @if($categoria->ativo == 0)
+            <tr class="danger">
+            @else
+            <tr class="success">
+            @endif
+            <td align="center">{{ $categoria->id }}</td>
+            <td align="center">
                 @if($categoria->ativo == 0)
                     <i class="fa fa-times" aria-hidden="false"></i>
                 @else
@@ -49,7 +53,7 @@ Gerenciador de categorias
                 @endif
             </td>
             <td>{{ $categoria->nome }}</td>
-            <td><a href="{{ route('categoria.edita', ['id' => $categoria->id]) }}" class="btn btn-primary btn-sm" title="Editar {{ $categoria->nome }}" role="button"><i class="fa fa-pencil" aria-hidden="true"></i>
+            <td align="center"><a href="{{ route('categoria.edita', ['id' => $categoria->id]) }}" class="btn btn-primary btn-sm" title="Editar {{ $categoria->nome }}" role="button"><i class="fa fa-pencil" aria-hidden="true"></i>
 </a><!-- &nbsp;<a href="{{ route('categoria.destroy', ['id' => $categoria->id]) }}" class="btn btn-danger btn-sm" title="Remover {{ $categoria->nome }}" role="button"><i class="fa fa-trash-o" aria-hidden="true"></i></a> --></td>
         </tr>
         @endforeach
